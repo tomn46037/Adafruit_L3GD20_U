@@ -1,9 +1,9 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
-#include <Adafruit_L3GD20_U.h>
+#include <Adafruit_L3G4200D_U.h>
 
 /* Assign a unique ID to this sensor at the same time */
-Adafruit_L3GD20_Unified gyro = Adafruit_L3GD20_Unified(20);
+Adafruit_L3G4200D_Unified gyro = Adafruit_L3G4200D_Unified(20);
 
 void displaySensorDetails(void)
 {

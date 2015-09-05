@@ -1,17 +1,22 @@
-## Adafruit Unified L3GD20 Driver ##
+## Adafruit Unified Sensor Library Unified L3G4200D Driver ##
 
-This unified sensor driver is for use with the Adafruit Triple-Axis Gyro sensor and the Adafruit 10DOF Breakout, and has been designed specifically for these boards:
+This library was copied from Adafruit's LG3D20 unified libraray.  All I had available at the moment was an L3G4200D.  The only change was the I2C address and the WHO_AM_I value.  They'er detailed in (http://www.st.com/st-web-ui/static/active/en/resource/sales_and_marketing/presentation/product_presentation/l3gd20_l3g4200d_marketing_pres.pdf)  I also changed the fucntion names so there wouldn't be any conflict should someone want to use both at the same time?  (Two parts of an arm?  I don't know?:)
 
-  ----> https://www.adafruit.com/products/1032
-  ----> http://www.adafruit.com/products/1604
+I whole heartedly support Adafruit and buy from them when I can.  They're amazing!  I would ask that you please do the same!
 
-Check out the links above for our tutorials and wiring diagrams 
+This unified sensor driver is for use with the L3G4200D Triple-Axis Gyro sensor.  This will work with a GY-80 IMU.  
 
-The updated 'Unified' sensor driver (based on Adafruit's Sensor API) use I2C to communicate.  If you need to use SPI on the L3GD20, please look at the original (non unified) driver that is still available here: https://github.com/adafruit/Adafruit_L3GD20
+
+
 
 Adafruit invests time and resources providing this open source code, 
 please support Adafruit and open-source hardware by purchasing 
 products from Adafruit!
+
+
+
+
+
 
 ## What is the Adafruit Unified Sensor Library? ##
 
@@ -32,6 +37,6 @@ Light sensors will always report units in lux, gyroscopes will always report uni
 Written by Kevin Townsend for Adafruit Industries.  
 BSD license, all text above must be included in any redistribution
 
-To download. click the **Download ZIP** in the right-hand column, rename the uncompressed folder Adafruit\_L3GD20\_U. Check that the Adafruit\_L3GD20\_U folder contains Adafruit\_L3GD20\U.cpp and Adafruit\_L3GD20\_U.h
+To download. click the **Download ZIP** in the right-hand column, rename the uncompressed folder Adafruit_L3G4200D_U. Check that the Adafruit_L3G4200D_U folder contains Adafruit_L3G4200D_U.cpp and Adafruit_L3G4200D_U.h
 
-Place the Adafruit\_L3GD20\_U library folder your (arduinosketchfolder)/libraries/ folder. You may need to create the libraries subfolder if its your first library. Restart the IDE.
+Place the Adafruit_L3G4200D_U library folder your (arduinosketchfolder)/libraries/ folder. You may need to create the libraries subfolder if its your first library. Restart the IDE.

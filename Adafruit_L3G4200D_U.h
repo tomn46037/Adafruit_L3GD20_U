@@ -1,7 +1,7 @@
 /***************************************************
-  This is a library for the L3GD20 GYROSCOPE
+  This is a library for the L3G4200D GYROSCOPE
 
-  Designed specifically to work with the Adafruit L3GD20 Breakout 
+  Designed specifically to work with the Adafruit L3G4200D Breakout 
   ----> https://www.adafruit.com/products/1032
 
   These sensors use I2C or SPI to communicate, 2 pins (I2C) 
@@ -14,8 +14,8 @@
   Written by Kevin "KTOWN" Townsend for Adafruit Industries.
   BSD license, all text above must be included in any redistribution
  ****************************************************/
-#ifndef __L3GD20_H__
-#define __L3GD20_H__
+#ifndef __L3G4200D_H__
+#define __L3G4200D_H__
 
 #if (ARDUINO >= 100)
  #include "Arduino.h"
@@ -29,10 +29,10 @@
 /*=========================================================================
     I2C ADDRESS/BITS AND SETTINGS
     -----------------------------------------------------------------------*/
-    #define L3GD20_ADDRESS           (0x6B)        // 1101011
-    #define L3GD20_POLL_TIMEOUT      (100)         // Maximum number of read attempts
-    #define L3GD20_ID                0xD4
-    #define L3GD20H_ID               0xD7
+    #define L3G4200D_ADDRESS           (0x69)
+    #define L3G4200D_POLL_TIMEOUT      (100)         // Maximum number of read attempts
+    #define L3G4200D_ID                0xD3
+    #define L3G4200DH_ID               0xD7
     #define GYRO_SENSITIVITY_250DPS  (0.00875F)    // Roughly 22/256 for fixed point match
     #define GYRO_SENSITIVITY_500DPS  (0.0175F)     // Roughly 45/256
     #define GYRO_SENSITIVITY_2000DPS (0.070F)      // Roughly 18/256
@@ -83,10 +83,10 @@
     } gyroRange_t;
 /*=========================================================================*/
 
-class Adafruit_L3GD20_Unified : public Adafruit_Sensor
+class Adafruit_L3G4200D_Unified : public Adafruit_Sensor
 {
   public:
-    Adafruit_L3GD20_Unified(int32_t sensorID = -1);
+    Adafruit_L3G4200D_Unified(int32_t sensorID = -1);
 
     bool begin           ( gyroRange_t rng = GYRO_RANGE_250DPS );
     void enableAutoRange ( bool enabled );

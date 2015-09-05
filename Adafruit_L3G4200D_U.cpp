@@ -1,7 +1,7 @@
 /***************************************************
-  This is a library for the L3GD20 GYROSCOPE
+  This is a library for the L3G4200D GYROSCOPE
 
-  Designed specifically to work with the Adafruit L3GD20 Breakout 
+  Designed specifically to work with the Adafruit L3G4200D Breakout 
   ----> https://www.adafruit.com/products/1032
 
   These sensors use I2C or SPI to communicate, 2 pins (I2C) 
@@ -23,7 +23,7 @@
 #include <Wire.h>
 #include <limits.h>
 
-#include "Adafruit_L3GD20_U.h"
+#include "Adafruit_L3G4200D_U.h"
 
 /***************************************************************************
  PRIVATE FUNCTIONS
@@ -34,9 +34,9 @@
     @brief  Abstract away platform differences in Arduino wire library
 */
 /**************************************************************************/
-void Adafruit_L3GD20_Unified::write8(byte reg, byte value)
+void Adafruit_L3G4200D_Unified::write8(byte reg, byte value)
 {
-  Wire.beginTransmission(L3GD20_ADDRESS);
+  Wire.beginTransmission(L3G4200D_ADDRESS);
   #if ARDUINO >= 100
     Wire.write((uint8_t)reg);
     Wire.write((uint8_t)value);
@@ -52,18 +52,18 @@ void Adafruit_L3GD20_Unified::write8(byte reg, byte value)
     @brief  Abstract away platform differences in Arduino wire library
 */
 /**************************************************************************/
-byte Adafruit_L3GD20_Unified::read8(byte reg)
+byte Adafruit_L3G4200D_Unified::read8(byte reg)
 {
   byte value;
 
-  Wire.beginTransmission((byte)L3GD20_ADDRESS);
+  Wire.beginTransmission((byte)L3G4200D_ADDRESS);
   #if ARDUINO >= 100
     Wire.write((uint8_t)reg);
   #else
     Wire.send(reg);
   #endif
   Wire.endTransmission();
-  Wire.requestFrom((byte)L3GD20_ADDRESS, (byte)1);
+  Wire.requestFrom((byte)L3G4200D_ADDRESS, (byte)1);
   while (!Wire.available()); // Wait for data to arrive.
   #if ARDUINO >= 100
     value = Wire.read();
@@ -81,10 +81,10 @@ byte Adafruit_L3GD20_Unified::read8(byte reg)
  
 /**************************************************************************/
 /*!
-    @brief  Instantiates a new Adafruit_L3GD20_Unified class
+    @brief  Instantiates a new Adafruit_L3G4200D_Unified class
 */
 /**************************************************************************/
-Adafruit_L3GD20_Unified::Adafruit_L3GD20_Unified(int32_t sensorID) {
+Adafruit_L3G4200D_Unified::Adafruit_L3G4200D_Unified(int32_t sensorID) {
   _sensorID = sensorID;
   _autoRangeEnabled = false;
 }
@@ -98,7 +98,7 @@ Adafruit_L3GD20_Unified::Adafruit_L3GD20_Unified(int32_t sensorID) {
     @brief  Setups the HW
 */
 /**************************************************************************/
-bool Adafruit_L3GD20_Unified::begin(gyroRange_t rng)
+bool Adafruit_L3G4200D_Unified::begin(gyroRange_t rng)
 {
   /* Enable I2C */
   Wire.begin();
@@ -110,7 +110,7 @@ bool Adafruit_L3GD20_Unified::begin(gyroRange_t rng)
      for correct address and that the IC is properly connected */
   uint8_t id = read8(GYRO_REGISTER_WHO_AM_I);
   //Serial.println(id, HEX);
-  if ((id != L3GD20_ID) && (id != L3GD20H_ID))
+  if ((id != L3G4200D_ID) && (id != L3G4200DH_ID))
   {
     return false;
   }
@@ -206,7 +206,7 @@ bool Adafruit_L3GD20_Unified::begin(gyroRange_t rng)
     @brief  Enables or disables auto-ranging
 */
 /**************************************************************************/
-void Adafruit_L3GD20_Unified::enableAutoRange(bool enabled)
+void Adafruit_L3G4200D_Unified::enableAutoRange(bool enabled)
 {
   _autoRangeEnabled = enabled;
 }
@@ -216,7 +216,7 @@ void Adafruit_L3GD20_Unified::enableAutoRange(bool enabled)
     @brief  Gets the most recent sensor event
 */
 /**************************************************************************/
-bool Adafruit_L3GD20_Unified::getEvent(sensors_event_t* event)
+bool Adafruit_L3G4200D_Unified::getEvent(sensors_event_t* event)
 {
   bool readingValid = false;
   
@@ -232,7 +232,7 @@ bool Adafruit_L3GD20_Unified::getEvent(sensors_event_t* event)
     event->timestamp = millis();
   
     /* Read 6 bytes from the sensor */
-    Wire.beginTransmission((byte)L3GD20_ADDRESS);
+    Wire.beginTransmission((byte)L3G4200D_ADDRESS);
     #if ARDUINO >= 100
       Wire.write(GYRO_REGISTER_OUT_X_L | 0x80);
     #else
@@ -242,7 +242,7 @@ bool Adafruit_L3GD20_Unified::getEvent(sensors_event_t* event)
         // Error. Retry.
         continue;
     }
-    Wire.requestFrom((byte)L3GD20_ADDRESS, (byte)6);
+    Wire.requestFrom((byte)L3G4200D_ADDRESS, (byte)6);
 
     #if ARDUINO >= 100
       uint8_t xlo = Wire.read();
@@ -346,13 +346,13 @@ bool Adafruit_L3GD20_Unified::getEvent(sensors_event_t* event)
     @brief  Gets the sensor_t data
 */
 /**************************************************************************/
-void  Adafruit_L3GD20_Unified::getSensor(sensor_t* sensor)
+void  Adafruit_L3G4200D_Unified::getSensor(sensor_t* sensor)
 {  
   /* Clear the sensor_t object */
   memset(sensor, 0, sizeof(sensor_t));
 
   /* Insert the sensor name in the fixed length char array */
-  strncpy (sensor->name, "L3GD20", sizeof(sensor->name) - 1);
+  strncpy (sensor->name, "L3G4200D", sizeof(sensor->name) - 1);
   sensor->name[sizeof(sensor->name)- 1] = 0;
   sensor->version     = 1;
   sensor->sensor_id   = _sensorID;
